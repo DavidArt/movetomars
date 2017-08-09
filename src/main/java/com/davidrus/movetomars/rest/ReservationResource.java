@@ -24,7 +24,7 @@ import java.time.LocalDate;
  * Spring Application Context
  */
 @RestController
-@RequestMapping("/berth/reservation/v1")
+@RequestMapping(ResourceConstants.MODULE_RESERVATION_V1)
 public class ReservationResource {
 
     /**
@@ -43,6 +43,6 @@ public class ReservationResource {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
             LocalDate checkout) {
 
-        return new ResponseEntity<ReservationResponse>(new ReservationResponse(), HttpStatus.OK);
+        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
     }
 }
