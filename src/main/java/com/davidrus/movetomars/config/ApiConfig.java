@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
+ * @author david
+ *
  * Configuration class for deserialization of Jsona into
  * Pojos, and serialization of Pojos into Jsons
  */

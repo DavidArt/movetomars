@@ -1,18 +1,18 @@
 package com.davidrus.movetomars.rest;
 
+import com.davidrus.movetomars.model.request.ReservationRequest;
 import com.davidrus.movetomars.model.response.ReservationResponse;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 
 /**
+ * @author david
+ *
  * A RestController for reservation
  *
  * A RestController annotation combines a Controller
@@ -45,4 +45,22 @@ public class ReservationResource {
 
         return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
     }
+
+    /**
+     * The Rest Api for the CREATE request
+     *
+     * @param reservationRequest the request for creating a new reservation
+     *                           which is a class representing the request
+     *                           body, which is sent, during a POST
+     * @return a ResponseEntity containing a ReservationResponse
+     */
+    @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<ReservationResponse> createReservation(
+            @RequestBody ReservationRequest reservationRequest) {
+
+        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.CREATED);
+    }
+
+
 }

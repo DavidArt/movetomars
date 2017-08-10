@@ -1,5 +1,8 @@
 package com.davidrus.movetomars.model;
 
+/**
+ * @author david
+ */
 public class Links {
 
     private Self self;

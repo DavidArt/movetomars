@@ -3,6 +3,8 @@ package com.davidrus.movetomars.model.response;
 import com.davidrus.movetomars.model.Links;
 
 /**
+ * @author david
+ *
  * Reservation response for the ReservationResource class
  */
 public class ReservationResponse {

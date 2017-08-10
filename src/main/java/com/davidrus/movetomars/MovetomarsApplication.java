@@ -6,6 +6,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 /**
+ * @author david
+ *
  * Main point for starting the application
  *
  * Automated bean configuration
