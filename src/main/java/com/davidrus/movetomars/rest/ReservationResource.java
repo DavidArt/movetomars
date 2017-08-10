@@ -33,6 +33,7 @@ public class ReservationResource {
      * @param checkin date for checkin to Mars colony
      * @param checkout date for checkout from Mars colony
      * @return a ResponseEntity containing a ReservationResponse
+     * with 200 (OK) status
      */
     @RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ReservationResponse> getAvailableModules(
@@ -50,9 +51,8 @@ public class ReservationResource {
      * The Rest Api for the CREATE request
      *
      * @param reservationRequest the request for creating a new reservation
-     *                           which is a class representing the request
-     *                           body, which is sent, during a POST
      * @return a ResponseEntity containing a ReservationResponse
+     * with 201 (CREATED) status
      */
     @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -62,5 +62,30 @@ public class ReservationResource {
         return new ResponseEntity<>(new ReservationResponse(), HttpStatus.CREATED);
     }
 
+    /**
+     * The Rest Api for the PUT request
+     *
+     * @param reservationRequest the request for updating an existing reservation
+     * @return a ResponseEntity containing a ReservationResponse
+     * with 200 (OK) status
+     */
+    @RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<ReservationResponse> updateReservation(
+            @RequestBody ReservationRequest reservationRequest) {
 
+        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
+    }
+
+    /**
+     * The Rest Api for the DELETE request
+     *
+     * @param reservationId the id of the user that made the reservation
+     * @return
+     */
+    @RequestMapping(path = "/{reservationId}", method = RequestMethod.DELETE)
+    public ResponseEntity<Void> deleteReservation(@PathVariable long reservationId) {
+
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
 }
