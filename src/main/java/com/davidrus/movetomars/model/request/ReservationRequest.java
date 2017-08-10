@@ -27,6 +27,19 @@ public class ReservationRequest {
         super();
     }
 
+    /**
+     * Creates a new ReservationRequest instance
+     * @param id id of the user
+     * @param checkin checkin date
+     * @param checkout checkout date
+     */
+    public ReservationRequest(Long id, LocalDate checkin, LocalDate checkout) {
+        super();
+        this.id = id;
+        this.checkin = checkin;
+        this.checkout = checkout;
+    }
+
     public Long getId() {
         return id;
     }

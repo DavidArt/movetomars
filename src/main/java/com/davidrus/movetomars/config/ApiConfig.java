@@ -2,6 +2,7 @@ package com.davidrus.movetomars.config;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,10 +18,16 @@ public class ApiConfig {
     /**
      * ObjectMapper defines how Json strings from the request body
      * are deserialized in POJO (Plain Old Java Object).
+     *
+     * objectMapper method will parse ISO formatted dates.
      */
     @Bean
     public ObjectMapper objectMapper() {
-        return new ObjectMapper();
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+
+        return objectMapper;
     }
 
     /**
