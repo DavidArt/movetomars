@@ -27,6 +27,22 @@ import java.time.LocalDate;
 @RequestMapping(ResourceConstants.MODULE_RESERVATION_V1)
 public class ReservationResource {
 
+
+    /**
+     * The Rest Api for the CREATE request
+     *
+     * @param reservationRequest the request for creating a new reservation
+     * @return a ResponseEntity containing a ReservationResponse
+     * with 201 (CREATED) status
+     */
+    @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<ReservationResponse> createReservation(
+            @RequestBody ReservationRequest reservationRequest) {
+
+        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.CREATED);
+    }
+
     /**
      * The Rest API for a GET request
      *
@@ -45,21 +61,6 @@ public class ReservationResource {
             LocalDate checkout) {
 
         return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
-    }
-
-    /**
-     * The Rest Api for the CREATE request
-     *
-     * @param reservationRequest the request for creating a new reservation
-     * @return a ResponseEntity containing a ReservationResponse
-     * with 201 (CREATED) status
-     */
-    @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
-            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<ReservationResponse> createReservation(
-            @RequestBody ReservationRequest reservationRequest) {
-
-        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.CREATED);
     }
 
     /**

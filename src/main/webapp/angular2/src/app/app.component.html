@@ -1,20 +1,155 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!
-  </h1>
-  <img width="300" src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gR2VuZXJhdG9yOiBBZG9iZSBJbGx1c3RyYXRvciAxOS4xLjAsIFNWRyBFeHBvcnQgUGx1Zy1JbiAuIFNWRyBWZXJzaW9uOiA2LjAwIEJ1aWxkIDApICAtLT4NCjxzdmcgdmVyc2lvbj0iMS4xIiBpZD0iTGF5ZXJfMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayIgeD0iMHB4IiB5PSIwcHgiDQoJIHZpZXdCb3g9IjAgMCAyNTAgMjUwIiBzdHlsZT0iZW5hYmxlLWJhY2tncm91bmQ6bmV3IDAgMCAyNTAgMjUwOyIgeG1sOnNwYWNlPSJwcmVzZXJ2ZSI+DQo8c3R5bGUgdHlwZT0idGV4dC9jc3MiPg0KCS5zdDB7ZmlsbDojREQwMDMxO30NCgkuc3Qxe2ZpbGw6I0MzMDAyRjt9DQoJLnN0MntmaWxsOiNGRkZGRkY7fQ0KPC9zdHlsZT4NCjxnPg0KCTxwb2x5Z29uIGNsYXNzPSJzdDAiIHBvaW50cz0iMTI1LDMwIDEyNSwzMCAxMjUsMzAgMzEuOSw2My4yIDQ2LjEsMTg2LjMgMTI1LDIzMCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAJIi8+DQoJPHBvbHlnb24gY2xhc3M9InN0MSIgcG9pbnRzPSIxMjUsMzAgMTI1LDUyLjIgMTI1LDUyLjEgMTI1LDE1My40IDEyNSwxNTMuNCAxMjUsMjMwIDEyNSwyMzAgMjAzLjksMTg2LjMgMjE4LjEsNjMuMiAxMjUsMzAgCSIvPg0KCTxwYXRoIGNsYXNzPSJzdDIiIGQ9Ik0xMjUsNTIuMUw2Ni44LDE4Mi42aDBoMjEuN2gwbDExLjctMjkuMmg0OS40bDExLjcsMjkuMmgwaDIxLjdoMEwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMUwxMjUsNTIuMQ0KCQlMMTI1LDUyLjF6IE0xNDIsMTM1LjRIMTA4bDE3LTQwLjlMMTQyLDEzNS40eiIvPg0KPC9nPg0KPC9zdmc+DQo=">
-</div>
-<h2>Here are some links to help you start: </h2>
-<ul>
-  <li>
-    <h2><a target="_blank" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://github.com/angular/angular-cli/wiki">CLI Documentation</a></h2>
-  </li>
-  <li>
-    <h2><a target="_blank" href="https://blog.angular.io//">Angular blog</a></h2>
-  </li>
-</ul>
+<header id="intro" style="display: block;">
+  <article class="fullheight" style="height: 568px;">
+    <div class="hgroup">
+      <h1>Move to Mars</h1>
+      <h2>First Hotel on the Red Planet</h2>
+      <p><a href="/#welcome"><img src="assets/images/arrow.png" alt="down arrow"></a></p>
+    </div>
+  </article>
 
+  <div class="scrollmagic-pin-spacer"
+       style="display: block; top: auto; left: auto; bottom: auto; right: auto; position: relative; margin: 0 auto auto; box-sizing: content-box; width: 100%; min-height: 44px; height: auto; padding-top: 0; padding-bottom: 0;">
+    <nav id="nav" style="position: relative; top: 0; left: 0; bottom: auto; right: auto; width: 100%;">
+      <div class="navbar">
+        <div class="brand"><a href="/#welcome">Book your Mars Module  <span>Here</span></a></div>
+      </div><!-- navbar -->
+    </nav>
+  </div>
+</header>
+<main id="wrapper">
+  <div class="scene" id="welcome">
+    <article class="content">
+      <div class="gallery">
+        <img src="assets/images/intro_mars_module.jpg" alt="Intro Mars Module Picture">
+        <img src="assets/images/intro_mars_module2.jpg" alt="Intro Mars Module Picture 2">
+        <img src="assets/images/intro_restaurant.jpg" alt="Intro Mars Restaurant Area">
+        <img src="assets/images/intro_attractions.jpg" alt="Intro Mars Attractions Picture">
+        <img class="hidesm" src="assets/images/intro_dining.jpg" alt="Intro Mars Dining Picture">
+      </div>
+      <h1>Book a Module on Mars</h1>
+
+      {{title}}
+
+    </article>
+  </div><!-- welcome -->
+  <div class="scene" id="marshotelinfo">
+    <article class="heading">
+      <h1>Essential Info</h1>
+    </article>
+    <article id="usefulinfo">
+      <section id="arrivalinfo">
+        <h2>Arrival Information</h2>
+        <ul>
+          <li><strong>Check-in:</strong> 3:00 PM</li>
+          <li><strong>Check-out:</strong> 11:00 AM</li>
+          <li><strong>Parking:</strong> Self-parking in the underground spacecraft garage is 50 euro per day and valet-parking is 150 euro
+            per day.
+          </li>
+          <li><strong>Spacecraft Transfer:</strong> We offer a complimentary service for transfer to the Take-of/Landing Area of the
+            spacecrafts. That means you can get a flight to Earth every day.
+          </li>
+          <li><strong>Take-off Area:</strong> We have our own take-of / landing area if you want to come to Mars with your own spacecraft.
+          Limits for landing/take of is 30 tones per spacecraft</li>
+          <li><strong>Pet Policy:</strong> Pets of all sizes and types are allowed in designated pet rooms, in our Pets Hotel.
+            Service animals are allowed everywhere.
+          </li>
+        </ul>
+      </section>
+      <section class="checklist" id="services">
+        <h2>Services and Amenities</h2>
+        <p>Our services and amenities are designed to make your space-travel easy, your stay comfortable, and your Mars experience
+          one-of-a-kind.</p>
+        <ul>
+          <li>Indoor swimming pool</li>
+          <li>Low gravity fitness center</li>
+          <li>Martian exotic massage</li>
+          <li>Full service spa</li>
+          <li>In-room jacuzzi tubs</li>
+          <li>Mars view café &amp; smoothie bar</li>
+          <li>Coffee bar &amp; lounge area</li>
+          <li>Traditional Earth breakfast</li>
+          <li>Mars exploration Rover</li>
+          <li>Interplanetary culture center</li>
+          <li>Complimentary wireless service</li>
+          <li>Spacesuit &amp; dry cleaning service</li>
+          <li>Daily news from Earth</li>
+          <li>Meteor rain free hotel</li>
+          <li>Pet-friendly rooms &amp; common areas</li>
+        </ul>
+      </section>
+      <section class="checklist" id="accessibility">
+        <h2>Interplanetary Center</h2>
+        <p>We have the biggest interplanetary center in the entire solar system</p>
+        <ul>
+          <li>See the history of the Galaxy in VR</li>
+          <li>Meet other forms of live</li>
+          <li>Learn basic words in universal language</li>
+          <li>Interplanetary networking parties</li>
+          <li>Interplanetary souvenir bazaar</li>
+        </ul>
+      </section>
+    </article>
+    <article id="marsgreenprogram">
+      <h2>Move to Mars - Module Hotel</h2>
+      <p><strong>Move to Mars - Module Hotel</strong> was the first hotel on the red planet, and we considered the impact on the Mars
+        the entire way. From green building materials, to solar power energy, all the Module Hotel Complex it's energy-friendly,
+        and has a minimal impact on the Mars surface. </p>
+    </article>
+  </div><!-- hotelinfo -->
+
+  <div class="scene" id="dining">
+    <article id="areadining">
+      <h1>Dining Area on Mars</h1>
+      <p>Dining on Mars it's a unique adventure. It's not like anything you have done before. The martian view it's
+        absolutely unique. Siting in a comfortable chair and watching the Mars two moons, Phobos and Deimos, it's defiantly
+        a one of a kind experience. We offer a great diversity of Earth and Mars cuisine, but also a lot of interplanetary
+        cuisine, to have a real tasty adventure.</p>
+    </article>
+    <article id="inhotel">
+      <section id="marsrooftopcafe">
+        <h2>Mars View Café</h2>
+        <img src="assets/images/mars_view_cafe.jpg" alt="Mars View Café">
+        <p>Mars View Café is the destination for an exclusive dining. We have a large variety of food, our chefs
+          being among the best in the solar system. And don't forget the amazing view over the Mars's moons.</p>
+      </section>
+
+      <section id="marssmoothiebar">
+        <h2>Mars Smoothie Bar</h2>
+        <img src="assets/images/mars_smoothie_bar.jpg" alt="Mars Smoothie Bar">
+        <p>The Mars Smoothie Bar gives you panoramic views over the martian landscape, where you can have one of our amazing
+          smoothies while you wait for your table in the Dining Area. You can make your own smoothie, and don't forget to put
+          some marsbar on top.</p>
+      </section>
+
+      <section id="marsbreakfast">
+        <h2>Martian Breakfast</h2>
+        <img src="assets/images/martian_breakfas.jpg" alt="Martian Breakfas">
+        <p>Our traditional Earth Breakfast and Coffee Bar, located adjacent to our dining area, is the perfect way to start your
+          morning. You can enjoy the breakfast you were used to, and don't miss the amazing experience of beign on the red planet.</p>
+      </section>
+    </article><!-- inhotel -->
+    <article id="roomservice">
+      <h1>Thank you for your visit</h1>
+      <p>If you have any more questions, or suggestions for us, please fell free to contact us at the links bellow.
+        And don't forget:
+        <strong>" Q: What is a spaceman’s favorite chocolate?
+          A: A marsbar!."</strong></p>
+    </article>
+  </div><!-- dining -->
+
+</main>
+<footer class="scene">
+  <article class="content">
+    <div id="socialmedia">
+      <ul class="group">
+        <li><a href="https://twitter.com/spacex/"><img class="icon" src="assets/images/twitter.png"
+                                                alt="icon for twitter"></a></li>
+        <li><a href="https://www.facebook.com/MarsOneProject/videos/1221397117908695/"><img class="icon" src="assets/images/facebook.png"
+                                                    alt="icon for facebook"></a></li>
+        <li><a href="https://www.youtube.com/watch?v=Ndpxuf-uJHE"><img class="icon" src="assets/images/youtube.png" alt="icon for youtube"></a>
+        </li>
+      </ul>
+    </div>
+  </article>
+</footer>
+<script src="src/app/images/script.js"></script>
