@@ -33,8 +33,8 @@
           </div>
           <h1>Book a Module on Mars</h1>
 
-          <form class="form-horizontal" [formGroup]="roomsearch"
-                (ngSubmit)="onSubmit(roomsearch)">
+          <form class="form-horizontal" [formGroup]="modulesearch"
+                (ngSubmit)="onSubmit(modulesearch)">
             /*
             * bug here?
             */
@@ -63,6 +63,30 @@
         </div>
       </div>
 
+      <h1>Available Modules</h1>
+
+      <div class="row">
+        <div class="col-12">
+          <div class="table-responsive">
+            <table class="table">
+              <tbody>
+              <tr *ngFor="let module of modules">
+                <td>
+                  <img src="assets/images/intro_restaurant.jpg" alt="Intro Mars Restaurant Area">
+                </td>
+                <td>
+                  <strong>Module: {{module.moduleNumber}}</strong><br/>
+                  <strong>Price: {{module.price}} $</strong>
+                </td>
+                <td>
+                  <button type="submit" class="btn btn-primary">Reserve</button>
+                </td>
+              </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
 
     </article>
   </div><!-- welcome -->
