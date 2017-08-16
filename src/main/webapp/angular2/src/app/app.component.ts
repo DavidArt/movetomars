@@ -45,6 +45,10 @@ export class AppComponent implements OnInit {
     console.log(value);
   }
 
+  reserveModule(value:string) {
+    console.log("Module id for reservation: " + value);
+  }
+
 }
 
 /**
