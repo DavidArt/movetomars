@@ -2,8 +2,11 @@ package com.davidrus.movetomars.model;
 
 /**
  * @author david
+ *
+ * Self refering link, used to get the
+ * resource directly, by Id number
  */
-public class Links {
+public class Link {
 
     private Self self;
 

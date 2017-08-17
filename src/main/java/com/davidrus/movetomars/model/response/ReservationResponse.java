@@ -1,6 +1,6 @@
 package com.davidrus.movetomars.model.response;
 
-import com.davidrus.movetomars.model.Links;
+import com.davidrus.movetomars.model.Link;
 
 /**
  * @author david
@@ -25,9 +25,9 @@ public class ReservationResponse {
     private Integer price;
 
     /**
-     * Links
+     * Link
      */
-    private Links links;
+    private Link link;
 
     /**
      * Creates a new ReservationResponse entity
@@ -71,11 +71,11 @@ public class ReservationResponse {
         this.price = price;
     }
 
-    public Links getLinks() {
-        return links;
+    public Link getLink() {
+        return link;
     }
 
-    public void setLinks(Links links) {
-        this.links = links;
+    public void setLink(Link link) {
+        this.link = link;
     }
 }
