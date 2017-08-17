@@ -14,8 +14,12 @@ import java.time.LocalDate;
 public class ReservationRequest {
 
     private Long id;
+
+    private Long moduleId;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate checkin;
+
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate checkout;
 
@@ -29,15 +33,22 @@ public class ReservationRequest {
 
     /**
      * Creates a new ReservationRequest instance
-     * @param id id of the user
+     * @param moduleId id of the room
      * @param checkin checkin date
      * @param checkout checkout date
      */
-    public ReservationRequest(Long id, LocalDate checkin, LocalDate checkout) {
-        super();
-        this.id = id;
+    public ReservationRequest(Long moduleId, LocalDate checkin, LocalDate checkout) {
+        this.moduleId = moduleId;
         this.checkin = checkin;
         this.checkout = checkout;
+    }
+
+    public Long getModuleId() {
+        return moduleId;
+    }
+
+    public void setModuleId(Long moduleId) {
+        this.moduleId = moduleId;
     }
 
     public Long getId() {

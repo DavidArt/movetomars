@@ -2,6 +2,8 @@ package com.davidrus.movetomars.entity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The entity representing a module to reserve
@@ -29,6 +31,9 @@ public class ModuleEntity {
      */
     @NotNull
     private Integer price;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<ReservationEntity> reservationEntityList;
 
     /**
      * Creates a new ModuleEntity instance with default values
@@ -68,5 +73,20 @@ public class ModuleEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<ReservationEntity> getReservationEntityList() {
+        return reservationEntityList;
+    }
+
+    public void setReservationEntityList(List<ReservationEntity> reservationEntityList) {
+        this.reservationEntityList = reservationEntityList;
+    }
+
+    public void addReservationEntity(ReservationEntity reservationEntity) {
+        if (null == reservationEntityList)
+            reservationEntityList = new ArrayList<>();
+
+        reservationEntityList.add(reservationEntity);
     }
 }

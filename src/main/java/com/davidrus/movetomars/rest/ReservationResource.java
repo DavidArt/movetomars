@@ -1,12 +1,16 @@
 package com.davidrus.movetomars.rest;
 
-import com.davidrus.movetomars.convertor.RoomEntityToReservationResponseConverter;
+import com.davidrus.movetomars.convertor.ModuleEntityToReservableModuleResponseConverter;
 import com.davidrus.movetomars.entity.ModuleEntity;
+import com.davidrus.movetomars.entity.ReservationEntity;
 import com.davidrus.movetomars.model.request.ReservationRequest;
+import com.davidrus.movetomars.model.response.ReservableModuleResponse;
 import com.davidrus.movetomars.model.response.ReservationResponse;
 import com.davidrus.movetomars.repository.ModuleRepository;
 import com.davidrus.movetomars.repository.PageableModuleRepository;
+import com.davidrus.movetomars.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.convert.ConversionService;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,6 +36,7 @@ import java.time.LocalDate;
  */
 @RestController
 @RequestMapping(ResourceConstants.MODULE_RESERVATION_V1)
+@CrossOrigin
 public class ReservationResource {
 
     @Autowired
@@ -40,11 +45,17 @@ public class ReservationResource {
     @Autowired
     ModuleRepository moduleRepository;
 
+    @Autowired
+    ReservationRepository reservationRepository;
+
+    @Autowired
+    ConversionService conversionService;
+
     /**
      * The Rest Api for the CREATE request
      *
      * @param reservationRequest the request for creating a new reservation
-     * @return a ResponseEntity containing a ReservationResponse
+     * @return a ResponseEntity containing a ReservableModuleResponse
      * with 201 (CREATED) status
      */
     @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
@@ -52,7 +63,17 @@ public class ReservationResource {
     public ResponseEntity<ReservationResponse> createReservation(
             @RequestBody ReservationRequest reservationRequest) {
 
-        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.CREATED);
+        ReservationEntity reservationEntity = conversionService.convert(reservationRequest, ReservationEntity.class);
+        reservationRepository.save(reservationEntity);
+
+        ModuleEntity moduleEntity = moduleRepository.findById(reservationRequest.getModuleId());
+        moduleEntity.addReservationEntity(reservationEntity);
+        moduleRepository.save(moduleEntity);
+        reservationEntity.setModuleEntity(moduleEntity);
+
+        ReservationResponse reservationResponse = conversionService.convert(reservationEntity, ReservationResponse.class);
+
+        return new ResponseEntity<>(reservationResponse, HttpStatus.CREATED);
     }
 
     /**
@@ -60,11 +81,11 @@ public class ReservationResource {
      *
      * @param checkin date for checkin to Mars colony
      * @param checkout date for checkout from Mars colony
-     * @return a ResponseEntity containing a ReservationResponse
+     * @return a ResponseEntity containing a ReservableModuleResponse
      * with 200 (OK) status
      */
     @RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public Page<ReservationResponse> getAvailableModules(
+    public Page<ReservableModuleResponse> getAvailableModules(
             @RequestParam(value = "checkin")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
             LocalDate checkin,
@@ -74,29 +95,29 @@ public class ReservationResource {
 
         Page<ModuleEntity> moduleEntityList = pageableModuleRepository.findAll(pageable);
 
-        return moduleEntityList.map(new RoomEntityToReservationResponseConverter());
+        return moduleEntityList.map(new ModuleEntityToReservableModuleResponseConverter());
     }
 
     @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ModuleEntity> getModuleById(@PathVariable Long moduleId) {
         ModuleEntity moduleEntity = moduleRepository.findById(moduleId);
 
-        return new ResponseEntity<ModuleEntity>(moduleEntity, HttpStatus.OK);
+        return new ResponseEntity<>(moduleEntity, HttpStatus.OK);
     }
 
     /**
      * The Rest Api for the PUT request
      *
      * @param reservationRequest the request for updating an existing reservation
-     * @return a ResponseEntity containing a ReservationResponse
+     * @return a ResponseEntity containing a ReservableModuleResponse
      * with 200 (OK) status
      */
     @RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<ReservationResponse> updateReservation(
+    public ResponseEntity<ReservableModuleResponse> updateReservation(
             @RequestBody ReservationRequest reservationRequest) {
 
-        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
+        return new ResponseEntity<>(new ReservableModuleResponse(), HttpStatus.OK);
     }
 
     /**
