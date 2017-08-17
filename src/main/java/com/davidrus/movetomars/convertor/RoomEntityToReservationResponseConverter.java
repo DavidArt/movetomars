@@ -31,6 +31,7 @@ public class RoomEntityToReservationResponseConverter implements Converter<Modul
         Link link = new Link();
         Self self = new Self();
         self.setRef(ResourceConstants.MODULE_RESERVATION_V1 + "/" + source.getId());
+        link.setSelf(self);
         reservationResponse.setLink(link);
 
         return reservationResponse;

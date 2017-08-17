@@ -1,7 +1,14 @@
 package com.davidrus.movetomars.rest;
 
+import com.davidrus.movetomars.convertor.RoomEntityToReservationResponseConverter;
+import com.davidrus.movetomars.entity.ModuleEntity;
 import com.davidrus.movetomars.model.request.ReservationRequest;
 import com.davidrus.movetomars.model.response.ReservationResponse;
+import com.davidrus.movetomars.repository.ModuleRepository;
+import com.davidrus.movetomars.repository.PageableModuleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -27,6 +34,11 @@ import java.time.LocalDate;
 @RequestMapping(ResourceConstants.MODULE_RESERVATION_V1)
 public class ReservationResource {
 
+    @Autowired
+    PageableModuleRepository pageableModuleRepository;
+
+    @Autowired
+    ModuleRepository moduleRepository;
 
     /**
      * The Rest Api for the CREATE request
@@ -52,15 +64,24 @@ public class ReservationResource {
      * with 200 (OK) status
      */
     @RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<ReservationResponse> getAvailableModules(
+    public Page<ReservationResponse> getAvailableModules(
             @RequestParam(value = "checkin")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
             LocalDate checkin,
             @RequestParam(value = "checkout")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate checkout) {
+            LocalDate checkout, Pageable pageable) {
 
-        return new ResponseEntity<>(new ReservationResponse(), HttpStatus.OK);
+        Page<ModuleEntity> moduleEntityList = pageableModuleRepository.findAll(pageable);
+
+        return moduleEntityList.map(new RoomEntityToReservationResponseConverter());
+    }
+
+    @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<ModuleEntity> getModuleById(@PathVariable Long moduleId) {
+        ModuleEntity moduleEntity = moduleRepository.findById(moduleId);
+
+        return new ResponseEntity<ModuleEntity>(moduleEntity, HttpStatus.OK);
     }
 
     /**

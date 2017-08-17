@@ -10,5 +10,5 @@ import java.util.List;
  */
 public interface ModuleRepository extends CrudRepository<ModuleEntity, Long> {
 
-    List<ModuleEntity> findById(Long id);
+    ModuleEntity findById(Long id);
 }

@@ -24,9 +24,9 @@ public class H2Bootstrap implements CommandLineRunner{
 
         System.out.println("Bootstrapping data: ");
 
-        moduleRepository.save(new ModuleEntity(405, "200"));
-        moduleRepository.save(new ModuleEntity(407, "220"));
-        moduleRepository.save(new ModuleEntity(408, "250"));
+        moduleRepository.save(new ModuleEntity(405, 200));
+        moduleRepository.save(new ModuleEntity(407, 220));
+        moduleRepository.save(new ModuleEntity(408, 250));
 
         Iterable<ModuleEntity> itr = moduleRepository.findAll();
 
