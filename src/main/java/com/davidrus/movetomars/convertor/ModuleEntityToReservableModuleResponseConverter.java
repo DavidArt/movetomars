@@ -25,6 +25,7 @@ public class ModuleEntityToReservableModuleResponseConverter implements Converte
     public ReservableModuleResponse convert(ModuleEntity source) {
 
         ReservableModuleResponse reservableModuleResponse = new ReservableModuleResponse();
+        reservableModuleResponse.setId(source.getId());
         reservableModuleResponse.setModuleNumber(source.getModuleNumber());
         reservableModuleResponse.setPrice(source.getPrice());
 

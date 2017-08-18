@@ -32,7 +32,7 @@ public class H2Bootstrap implements CommandLineRunner{
 
         System.out.println("Printing out data: ");
         for (ModuleEntity module: itr) {
-            System.out.println(module.getModuleNumber());
+            System.out.println(module.getId() + " " + module.getModuleNumber());
         }
     }
 

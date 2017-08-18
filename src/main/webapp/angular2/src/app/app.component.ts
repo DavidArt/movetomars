@@ -1,5 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from "@angular/forms"
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import {Http, Response} from "@angular/http";
+import {Observable} from "rxjs/Rx";
+import "rxjs/add/operator/map";
+import "rxjs/add/operator/catch";
 
 @Component({
   selector: 'app-root',
@@ -9,6 +13,15 @@ import {FormControl, FormGroup} from "@angular/forms"
 export class AppComponent implements OnInit {
 
   title = 'Visit Mars like you have never done it before';
+
+  /**
+   * JS constructor
+   * @param {Http} http
+   */
+  constructor(private http:Http) {
+  }
+
+  private baseUrl:string = 'http://localhost:8080';
 
   /**
    * variable used to check if our form was submited
@@ -34,19 +47,37 @@ export class AppComponent implements OnInit {
       checkout: new FormControl('')
     });
 
-    this.modules = MODULES;
   }
 
   /**
    * Method used to trigger the action when our form is submitted
    * Indicates if our form was submitted
    */
-  onSubmit({value, valid}: { value: Modulesearch, valid: boolean }) {
-    console.log(value);
+  onSubmit({value, valid}: { value:Modulesearch, valid:boolean }) {
+
+    this.getAll()
+      .subscribe(
+        modules => this.modules = modules,
+        err => {
+          // Log errors if any
+          console.log(err);
+        });
   }
 
   reserveModule(value:string) {
     console.log("Module id for reservation: " + value);
+  }
+
+  getAll():Observable<Module[]> {
+
+    //noinspection TypeScriptValidateTypes
+    return this.http
+      .get(`${this.baseUrl}/module/reservation/v1/?checkin=2017-03-18&checkout=2017-03-25`)
+      .map(this.mapModule);
+  }
+
+  mapModule(response:Response):Module[] {
+    return response.json().content;
   }
 
 }
@@ -69,27 +100,3 @@ export interface Module {
   links: string;
 }
 
-/**
- * hardcoded Json for testing
- * @type {[{}]}
- */
-var MODULES:Module[] = [
-  {
-    "id" : "325656",
-    "moduleNumber" : "587",
-    "price" : "200",
-    "links" : ""
-  },
-  {
-    "id" : "5766772",
-    "moduleNumber" : "588",
-    "price" : "250",
-    "links" : ""
-  },
-  {
-    "id" : "2525337",
-    "moduleNumber" : "589",
-    "price" : "300",
-    "links" : ""
-  }
-];
