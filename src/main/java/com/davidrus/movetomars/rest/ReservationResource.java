@@ -1,6 +1,6 @@
 package com.davidrus.movetomars.rest;
 
-import com.davidrus.movetomars.convertor.ModuleEntityToReservableModuleResponseConverter;
+import com.davidrus.movetomars.convertor.ModuleDomainToReservableModuleResponseConverter;
 import com.davidrus.movetomars.domain.ModuleDomain;
 import com.davidrus.movetomars.domain.ReservationDomain;
 import com.davidrus.movetomars.model.request.ReservationRequest;
@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 /**
- * @author david
+ *  * @author david
  *
  * A RestController for reservation
  *
@@ -33,6 +33,8 @@ import java.time.LocalDate;
  * class for auto detection through classpath scanning,
  * meaning it will be auto-wired and added to the
  * Spring Application Context
+ *
+ * CrossOrigin annotation used to bind back-end to UI
  */
 @RestController
 @RequestMapping(ResourceConstants.MODULE_RESERVATION_V1)
@@ -95,7 +97,7 @@ public class ReservationResource {
 
         Page<ModuleDomain> moduleEntityList = pageableModuleRepository.findAll(pageable);
 
-        return moduleEntityList.map(new ModuleEntityToReservableModuleResponseConverter());
+        return moduleEntityList.map(new ModuleDomainToReservableModuleResponseConverter());
     }
 
     @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

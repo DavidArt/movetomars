@@ -1,8 +1,8 @@
 package com.davidrus.movetomars.config;
 
-import com.davidrus.movetomars.convertor.ReservationEntityToReservationResponseConverter;
-import com.davidrus.movetomars.convertor.ReservationRequestToReservationEntityConverter;
-import com.davidrus.movetomars.convertor.ModuleEntityToReservableModuleResponseConverter;
+import com.davidrus.movetomars.convertor.ReservationDomainToReservationResponseConverter;
+import com.davidrus.movetomars.convertor.ReservationRequestToReservationDomainConverter;
+import com.davidrus.movetomars.convertor.ModuleDomainToReservableModuleResponseConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
@@ -25,9 +25,9 @@ public class ConversionConfig {
      */
     private Set<Converter> getConverters() {
         Set<Converter> converters = new HashSet<>();
-        converters.add(new ModuleEntityToReservableModuleResponseConverter());
-        converters.add(new ReservationRequestToReservationEntityConverter());
-        converters.add(new ReservationEntityToReservationResponseConverter());
+        converters.add(new ModuleDomainToReservableModuleResponseConverter());
+        converters.add(new ReservationRequestToReservationDomainConverter());
+        converters.add(new ReservationDomainToReservationResponseConverter());
 
         return converters;
     }

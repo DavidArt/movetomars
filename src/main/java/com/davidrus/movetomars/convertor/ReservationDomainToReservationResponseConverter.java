@@ -4,7 +4,7 @@ import com.davidrus.movetomars.domain.ReservationDomain;
 import com.davidrus.movetomars.model.response.ReservationResponse;
 import org.springframework.core.convert.converter.Converter;
 
-public class ReservationEntityToReservationResponseConverter implements Converter<ReservationDomain, ReservationResponse> {
+public class ReservationDomainToReservationResponseConverter implements Converter<ReservationDomain, ReservationResponse> {
     /**
      * Convert the source object of type {@code S} to target type {@code T}.
      *

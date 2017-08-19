@@ -12,7 +12,7 @@ import org.springframework.core.convert.converter.Converter;
  * Than we will use the ReservableModuleResponse in the GET method on our Rest Controller
  * Class used to keep the logic out of the controller
  */
-public class ModuleEntityToReservableModuleResponseConverter implements Converter<ModuleDomain, ReservableModuleResponse> {
+public class ModuleDomainToReservableModuleResponseConverter implements Converter<ModuleDomain, ReservableModuleResponse> {
     /**
      * Convert the source object of type {@code S} to target type {@code T}.
      * Set the link of the ModuleDomain so that it reflects a reference to itself
