@@ -1,14 +1,12 @@
 package com.davidrus.movetomars.repository;
 
-import com.davidrus.movetomars.entity.ModuleEntity;
+import com.davidrus.movetomars.domain.ModuleDomain;
 import org.springframework.data.repository.CrudRepository;
-
-import java.util.List;
 
 /**
  *
  */
-public interface ModuleRepository extends CrudRepository<ModuleEntity, Long> {
+public interface ModuleRepository extends CrudRepository<ModuleDomain, Long> {
 
-    ModuleEntity findById(Long id);
+    ModuleDomain findById(Long id);
 }

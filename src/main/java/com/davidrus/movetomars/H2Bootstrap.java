@@ -1,6 +1,6 @@
 package com.davidrus.movetomars;
 
-import com.davidrus.movetomars.entity.ModuleEntity;
+import com.davidrus.movetomars.domain.ModuleDomain;
 import com.davidrus.movetomars.repository.ModuleRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +24,14 @@ public class H2Bootstrap implements CommandLineRunner{
 
         System.out.println("Bootstrapping data: ");
 
-        moduleRepository.save(new ModuleEntity(405, 200));
-        moduleRepository.save(new ModuleEntity(407, 220));
-        moduleRepository.save(new ModuleEntity(408, 250));
+        moduleRepository.save(new ModuleDomain(404, 210));
+        moduleRepository.save(new ModuleDomain(405, 235));
+        moduleRepository.save(new ModuleDomain(406, 275));
 
-        Iterable<ModuleEntity> itr = moduleRepository.findAll();
+        Iterable<ModuleDomain> itr = moduleRepository.findAll();
 
         System.out.println("Printing out data: ");
-        for (ModuleEntity module: itr) {
+        for (ModuleDomain module: itr) {
             System.out.println(module.getId() + " " + module.getModuleNumber());
         }
     }

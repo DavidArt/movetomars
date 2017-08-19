@@ -30,14 +30,14 @@ public class ReservableModuleResponse {
     private Link link;
 
     /**
-     * Creates a new ReservableModuleResponse entity
+     * Creates a new ReservableModuleResponse domain
      */
     public ReservableModuleResponse() {
         super();
     }
 
     /**
-     * Creates a new ReservableModuleResponse entity and initializes
+     * Creates a new ReservableModuleResponse domain and initializes
      * the fields with the passed values to the constructor
      * @param moduleNumber
      * @param price

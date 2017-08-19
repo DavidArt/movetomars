@@ -37,7 +37,8 @@ public class ReservationRequest {
      * @param checkin checkin date
      * @param checkout checkout date
      */
-    public ReservationRequest(Long moduleId, LocalDate checkin, LocalDate checkout) {
+    public ReservationRequest(Long id, Long moduleId, LocalDate checkin, LocalDate checkout) {
+        this.id = id;
         this.moduleId = moduleId;
         this.checkin = checkin;
         this.checkout = checkout;

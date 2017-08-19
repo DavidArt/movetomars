@@ -1,4 +1,4 @@
-package com.davidrus.movetomars.entity;
+package com.davidrus.movetomars.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "Reservation")
-public class ReservationEntity {
+public class ReservationDomain {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -19,12 +19,12 @@ public class ReservationEntity {
     private LocalDate checkout;
 
     @ManyToOne
-    private ModuleEntity moduleEntity;
+    private ModuleDomain moduleDomain;
 
-    public ReservationEntity() {
+    public ReservationDomain() {
     }
 
-    public ReservationEntity(LocalDate checkin, LocalDate checkout) {
+    public ReservationDomain(LocalDate checkin, LocalDate checkout) {
         this.checkin = checkin;
         this.checkout = checkout;
     }
@@ -53,11 +53,11 @@ public class ReservationEntity {
         this.checkout = checkout;
     }
 
-    public ModuleEntity getModuleEntity() {
-        return moduleEntity;
+    public ModuleDomain getModuleDomain() {
+        return moduleDomain;
     }
 
-    public void setModuleEntity(ModuleEntity moduleEntity) {
-        this.moduleEntity = moduleEntity;
+    public void setModuleDomain(ModuleDomain moduleDomain) {
+        this.moduleDomain = moduleDomain;
     }
 }

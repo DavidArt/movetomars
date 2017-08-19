@@ -1,4 +1,4 @@
-package com.davidrus.movetomars.entity;
+package com.davidrus.movetomars.domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The entity representing a module to reserve
- * This entity will be used to populate the database
+ * The domain representing a module to reserve
+ * This domain will be used to populate the database
  */
 @Entity
 @Table(name = "Module")
-public class ModuleEntity {
+public class ModuleDomain {
 
     /**
      * Id of the Module, used as a primary key in db
@@ -32,21 +32,24 @@ public class ModuleEntity {
     @NotNull
     private Integer price;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
-    private List<ReservationEntity> reservationEntityList;
+    /**
+     * Default, a OneToMany annotation is Lazy
+     */
+        @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    private List<ReservationDomain> reservationDomainList;
 
     /**
-     * Creates a new ModuleEntity instance with default values
+     * Creates a new ModuleDomain instance with default values
      */
-    public ModuleEntity() {
+    public ModuleDomain() {
     }
 
     /**
-     * Creates a new ModuleEntity instance initializing the:
+     * Creates a new ModuleDomain instance initializing the:
      * @param moduleNumber The module number
      * @param price The price of the module
      */
-    public ModuleEntity(Integer moduleNumber, Integer price) {
+    public ModuleDomain(Integer moduleNumber, Integer price) {
         this.moduleNumber = moduleNumber;
         this.price = price;
     }
@@ -75,18 +78,18 @@ public class ModuleEntity {
         this.id = id;
     }
 
-    public List<ReservationEntity> getReservationEntityList() {
-        return reservationEntityList;
+    public List<ReservationDomain> getReservationDomainList() {
+        return reservationDomainList;
     }
 
-    public void setReservationEntityList(List<ReservationEntity> reservationEntityList) {
-        this.reservationEntityList = reservationEntityList;
+    public void setReservationDomainList(List<ReservationDomain> reservationDomainList) {
+        this.reservationDomainList = reservationDomainList;
     }
 
-    public void addReservationEntity(ReservationEntity reservationEntity) {
-        if (null == reservationEntityList)
-            reservationEntityList = new ArrayList<>();
+    public void addReservationEntity(ReservationDomain reservationDomain) {
+        if (null == reservationDomainList)
+            reservationDomainList = new ArrayList<>();
 
-        reservationEntityList.add(reservationEntity);
+        reservationDomainList.add(reservationDomain);
     }
 }

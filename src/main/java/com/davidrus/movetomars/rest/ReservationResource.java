@@ -1,8 +1,8 @@
 package com.davidrus.movetomars.rest;
 
 import com.davidrus.movetomars.convertor.ModuleEntityToReservableModuleResponseConverter;
-import com.davidrus.movetomars.entity.ModuleEntity;
-import com.davidrus.movetomars.entity.ReservationEntity;
+import com.davidrus.movetomars.domain.ModuleDomain;
+import com.davidrus.movetomars.domain.ReservationDomain;
 import com.davidrus.movetomars.model.request.ReservationRequest;
 import com.davidrus.movetomars.model.response.ReservableModuleResponse;
 import com.davidrus.movetomars.model.response.ReservationResponse;
@@ -63,15 +63,15 @@ public class ReservationResource {
     public ResponseEntity<ReservationResponse> createReservation(
             @RequestBody ReservationRequest reservationRequest) {
 
-        ReservationEntity reservationEntity = conversionService.convert(reservationRequest, ReservationEntity.class);
-        reservationRepository.save(reservationEntity);
+        ReservationDomain reservationDomain = conversionService.convert(reservationRequest, ReservationDomain.class);
+        reservationRepository.save(reservationDomain);
 
-        ModuleEntity moduleEntity = moduleRepository.findById(reservationRequest.getModuleId());
-        moduleEntity.addReservationEntity(reservationEntity);
-        moduleRepository.save(moduleEntity);
-        reservationEntity.setModuleEntity(moduleEntity);
+        ModuleDomain moduleDomain = moduleRepository.findById(reservationRequest.getModuleId());
+        moduleDomain.addReservationEntity(reservationDomain);
+        moduleRepository.save(moduleDomain);
+        reservationDomain.setModuleDomain(moduleDomain);
 
-        ReservationResponse reservationResponse = conversionService.convert(reservationEntity, ReservationResponse.class);
+        ReservationResponse reservationResponse = conversionService.convert(reservationDomain, ReservationResponse.class);
 
         return new ResponseEntity<>(reservationResponse, HttpStatus.CREATED);
     }
@@ -93,16 +93,16 @@ public class ReservationResource {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
             LocalDate checkout, Pageable pageable) {
 
-        Page<ModuleEntity> moduleEntityList = pageableModuleRepository.findAll(pageable);
+        Page<ModuleDomain> moduleEntityList = pageableModuleRepository.findAll(pageable);
 
         return moduleEntityList.map(new ModuleEntityToReservableModuleResponseConverter());
     }
 
     @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<ModuleEntity> getModuleById(@PathVariable Long moduleId) {
-        ModuleEntity moduleEntity = moduleRepository.findById(moduleId);
+    public ResponseEntity<ModuleDomain> getModuleById(@PathVariable Long moduleId) {
+        ModuleDomain moduleDomain = moduleRepository.findById(moduleId);
 
-        return new ResponseEntity<>(moduleEntity, HttpStatus.OK);
+        return new ResponseEntity<>(moduleDomain, HttpStatus.OK);
     }
 
     /**
