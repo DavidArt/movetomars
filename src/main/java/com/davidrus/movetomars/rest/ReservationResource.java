@@ -85,6 +85,12 @@ public class ReservationResource {
      * The Rest API for a GET request return a Pageable list of objects
      * This reduces the load on the database and this allows our
      * API consumer (front-end) to iterate through data more easily
+     * <p>
+     * Calling the findAll method from PageableModuleRepository will return
+     * a Page object containing a list of moduleDomain objects
+     * <p>
+     * The map method will take a list of ModuleDomains objects, make the conversion
+     * and return a list of ReservableModuleResponse objects
      *
      * @param checkin  date for checkin to Mars colony
      * @param checkout date for checkout from Mars colony
@@ -101,24 +107,8 @@ public class ReservationResource {
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
                     LocalDate checkout, Pageable pageable) {
 
-        /*
-         * Calling the findAll method from PageableModuleRepository will return
-         * a Page object of ModuleDomain type, containing all the reservations made.
-         */
+        Page<ModuleDomain> moduleDomainList = pageableModuleRepository.findAll(pageable);
 
-           Page<ModuleDomain> moduleDomainList = pageableModuleRepository.findAll(pageable);
-
-//        Iterable<ModuleDomain> itr = pageableModuleRepository.findAll();
-//        for (ModuleDomain module : itr) {
-//            if (module.equals(reservationRepository.findById(module.getId()))) {
-//                newModuleDomainList.
-//            }
-//        }
-
-        /*
-         * The map method will take a list of ModuleDomains objects, make the conversion
-         * and return a list of ReservableModuleResponse objects
-         */
         return moduleDomainList.map(new ModuleDomainToReservableModuleResponseConverter());
     }
 
@@ -126,6 +116,7 @@ public class ReservationResource {
      * The getById method from our Rest API returns a ResponseEntity containing a
      * ModelDomain object, passing all the fields including a list with all
      * the reservation associated to that module object
+     *
      * @param moduleId
      * @return
      */
@@ -151,7 +142,7 @@ public class ReservationResource {
         ModuleDomain moduleDomain = moduleRepository.findById(reservationRequest.getModuleId());
         ReservationDomain reservationDomain = null;
 
-        for (ReservationDomain reservation: moduleDomain.getReservationDomainList()) {
+        for (ReservationDomain reservation : moduleDomain.getReservationDomainList()) {
             if (reservation.getId().equals(reservationRequest.getId())) {
 
                 reservationDomain = reservationRepository.findById(reservationRequest.getId());
