@@ -8,12 +8,13 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 /**
  * A PagingAndSortingRepository is similar to a CRUD repository, excepts
  * it lets you page the results
+ * PagingAndSortingRepository provide methods to do pagination and sorting records.
  */
 public interface PageableModuleRepository extends PagingAndSortingRepository<ModuleDomain, Long> {
 
     /**
      * Method that returns a Page object containing a list
-     * of ModuleEntities
+     * of ModuleDomains
      * @param id
      * @param page
      * @return a Page object containing ModuleEntities

@@ -6,20 +6,32 @@ import java.time.LocalDate;
 
 /**
  * @author david
- *
+ * <p>
  * From this class, we create a ReservationRequest object wich is
  * passed as a method parameter in the ReservationResource POST
  * method, to create a new reservation
  */
 public class ReservationRequest {
 
+    /**
+     * Auto generated id of the reservation
+     */
     private Long id;
 
+    /**
+     * Id of the module to reserve
+     */
     private Long moduleId;
 
+    /**
+     * Checkin field for the reservation
+     */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate checkin;
 
+    /**
+     * Checkout field for the reservation
+     */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private LocalDate checkout;
 
@@ -33,8 +45,9 @@ public class ReservationRequest {
 
     /**
      * Creates a new ReservationRequest instance
+     *
      * @param moduleId id of the room
-     * @param checkin checkin date
+     * @param checkin  checkin date
      * @param checkout checkout date
      */
     public ReservationRequest(Long id, Long moduleId, LocalDate checkin, LocalDate checkout) {

@@ -4,8 +4,10 @@ import com.davidrus.movetomars.model.Link;
 
 /**
  * @author david
- *
+ * <p>
  * Reservation response for the ReservationResource class
+ * We send a instance of this class as a response in
+ * the REST methods from our Rest Resource class
  */
 public class ReservableModuleResponse {
 
@@ -25,20 +27,21 @@ public class ReservableModuleResponse {
     private Integer price;
 
     /**
-     * Link
+     * A self reference link to the Module to reserve
      */
     private Link link;
 
     /**
-     * Creates a new ReservableModuleResponse domain
+     * Creates a new ReservableModuleResponse instance
      */
     public ReservableModuleResponse() {
         super();
     }
 
     /**
-     * Creates a new ReservableModuleResponse domain and initializes
+     * Creates a new ReservableModuleResponse instance and initializes
      * the fields with the passed values to the constructor
+     *
      * @param moduleNumber
      * @param price
      */

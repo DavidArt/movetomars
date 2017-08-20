@@ -22,10 +22,10 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 
 /**
- *  * @author david
- *
- * A RestController for reservation
- *
+ * * @author david
+ * <p>
+ * A RestController for reservations
+ * <p>
  * A RestController annotation combines a Controller
  * and a RequestBody annotation
  * The Controller annotation is a specialization of
@@ -33,7 +33,10 @@ import java.time.LocalDate;
  * class for auto detection through classpath scanning,
  * meaning it will be auto-wired and added to the
  * Spring Application Context
- *
+ * <p>
+ * RequestMapping is a RestMapping that maps the desired
+ * URI for our http requests
+ * <p>
  * CrossOrigin annotation used to bind back-end to UI
  */
 @RestController
@@ -58,7 +61,7 @@ public class ReservationResource {
      *
      * @param reservationRequest the request for creating a new reservation
      * @return a ResponseEntity containing a ReservableModuleResponse
-     * with 201 (CREATED) status
+     * with a 201 (CREATED) status
      */
     @RequestMapping(path = "", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -81,7 +84,7 @@ public class ReservationResource {
     /**
      * The Rest API for a GET request
      *
-     * @param checkin date for checkin to Mars colony
+     * @param checkin  date for checkin to Mars colony
      * @param checkout date for checkout from Mars colony
      * @return a ResponseEntity containing a ReservableModuleResponse
      * with 200 (OK) status
@@ -90,14 +93,22 @@ public class ReservationResource {
     public Page<ReservableModuleResponse> getAvailableModules(
             @RequestParam(value = "checkin")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate checkin,
+                    LocalDate checkin,
             @RequestParam(value = "checkout")
             @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
-            LocalDate checkout, Pageable pageable) {
+                    LocalDate checkout, Pageable pageable) {
 
-        Page<ModuleDomain> moduleEntityList = pageableModuleRepository.findAll(pageable);
+        /*
+         * Calling the findAll method from PageableModuleRepository will return
+         * a Page object of ModuleDomain type, containing all the reservations made.
+         */
+        Page<ModuleDomain> moduleDomainList = pageableModuleRepository.findAll(pageable);
 
-        return moduleEntityList.map(new ModuleDomainToReservableModuleResponseConverter());
+        /*
+         * The map method will take a list of ModuleDomains objects, make the conversion
+         * and return a list of ReservableModuleResponse objects
+         */
+        return moduleDomainList.map(new ModuleDomainToReservableModuleResponseConverter());
     }
 
     @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)

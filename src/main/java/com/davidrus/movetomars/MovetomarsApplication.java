@@ -10,9 +10,9 @@ import org.springframework.context.annotation.ComponentScan;
  *
  * Main point for starting the application
  *
- * Automated bean configuration
- * Automated scan for configuration classes to wire up
- * in the Spring Application Context
+ * EnableAutoConfiguration -> Automated bean configuration
+ * ComponentScan -> Automated scan for configuration classes
+ * to wire up in the Spring Application Context
  */
 @SpringBootApplication
 @EnableAutoConfiguration

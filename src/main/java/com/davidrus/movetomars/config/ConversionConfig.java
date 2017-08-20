@@ -1,8 +1,8 @@
 package com.davidrus.movetomars.config;
 
+import com.davidrus.movetomars.convertor.ModuleDomainToReservableModuleResponseConverter;
 import com.davidrus.movetomars.convertor.ReservationDomainToReservationResponseConverter;
 import com.davidrus.movetomars.convertor.ReservationRequestToReservationDomainConverter;
-import com.davidrus.movetomars.convertor.ModuleDomainToReservableModuleResponseConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.ConversionServiceFactoryBean;
@@ -34,7 +34,9 @@ public class ConversionConfig {
 
     /**
      * ConversionService Factory Bean
-     * @return
+     * Used to convert our resources
+     *
+     * @return a ConversionServiceFactoryBean bean
      */
     @Bean
     public ConversionService conversionService() {

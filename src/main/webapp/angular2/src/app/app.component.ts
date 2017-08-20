@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import {Http, Response, Headers, RequestOptions} from "@angular/http";
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {Headers, Http, RequestOptions, Response} from "@angular/http";
 import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
@@ -18,15 +18,15 @@ export class AppComponent implements OnInit {
    * JS constructor
    * @param {Http} http
    */
-  constructor(private http:Http) {
+  constructor(private http: Http) {
   }
 
-  private baseUrl:string = 'http://localhost:8080';
-  private getUrl:string = this.baseUrl + '/module/reservation/v1/';
-  private postUrl:string = this.baseUrl + '/module/reservation/v1';
+  private baseUrl: string = 'http://localhost:8080';
+  private getUrl: string = this.baseUrl + '/module/reservation/v1/';
+  private postUrl: string = this.baseUrl + '/module/reservation/v1';
 
   /**
-   * variable used to check if our form was submited
+   * variable used to check if our form was submitted
    */
   public submitted: boolean;
 
@@ -43,14 +43,14 @@ export class AppComponent implements OnInit {
   /**
    * checkin variable used for our POST method
    */
-  currentCheckInVal:string;
+  currentCheckInVal: string;
 
   /**
    * checkout variable used for our POST method
    */
-  currentCheckOutVal:string;
+  currentCheckOutVal: string;
 
-  request:ReserveModuleRequest;
+  request: ReserveModuleRequest;
 
   /**
    * Method used to initialize our form group
@@ -75,7 +75,7 @@ export class AppComponent implements OnInit {
    * Method used to trigger the action when our form is submitted
    * Indicates if our form was submitted
    */
-  onSubmit({value, valid}: { value:Modulesearch, valid:boolean }) {
+  onSubmit({value, valid}: { value: Modulesearch, valid: boolean }) {
 
     this.getAll()
       .subscribe(
@@ -86,14 +86,14 @@ export class AppComponent implements OnInit {
         });
   }
 
-  reserveModule(value:string) {
+  reserveModule(value: string) {
 
     this.request = new ReserveModuleRequest(value, this.currentCheckInVal, this.currentCheckOutVal);
     this.createReservation(this.request);
 
   }
 
-  getAll():Observable<Module[]> {
+  getAll(): Observable<Module[]> {
 
     //noinspection TypeScriptValidateTypes
     return this.http
@@ -101,7 +101,7 @@ export class AppComponent implements OnInit {
       .map(this.mapModule);
   }
 
-  createReservation(body:ReserveModuleRequest) {
+  createReservation(body: ReserveModuleRequest) {
     let bodyString = JSON.stringify(body); // Stringify payload
     let headers = new Headers({'Content-Type': 'application/json'}); // ... Set content type to JSON
     let options = new RequestOptions({headers: headers}); // Create a request option
@@ -110,7 +110,7 @@ export class AppComponent implements OnInit {
       .subscribe(res => console.log(res));
   }
 
-  mapModule(response:Response):Module[] {
+  mapModule(response: Response): Module[] {
     return response.json().content;
   }
 
@@ -135,11 +135,11 @@ export interface Module {
 }
 
 export class ReserveModuleRequest {
-  moduleId:string;
-  checkin:string;
-  checkout:string;
+  moduleId: string;
+  checkin: string;
+  checkout: string;
 
-  constructor(roomId:string, checkin:string, checkout:string) {
+  constructor(roomId: string, checkin: string, checkout: string) {
 
     this.moduleId = roomId;
     this.checkin = checkin;
