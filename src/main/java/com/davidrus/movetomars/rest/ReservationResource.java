@@ -178,6 +178,8 @@ public class ReservationResource {
     public ResponseEntity<Void> deleteReservation(@PathVariable long reservationId) {
 
         ReservationDomain reservationDomain = reservationRepository.findById(reservationId);
+        reservationRepository.delete(reservationDomain);
+
         return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }
