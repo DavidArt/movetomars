@@ -8,7 +8,7 @@ import java.time.LocalDate;
  * @author david
  * <p>
  * From this class, we create a ReservationRequest object wich is
- * passed as a method parameter in the ReservationResource POST
+ * passed as a method parameter in the ReservationResource PUT
  * method, to create a new reservation
  */
 public class ReservationRequest {

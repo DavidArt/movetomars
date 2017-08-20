@@ -5,6 +5,12 @@ import {Observable} from "rxjs/Rx";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/catch";
 
+/**
+ * In this class we have defined the base URI as
+ * http://localhost:8080 so we have a match with
+ * our back end port.
+ *
+ */
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

@@ -4,26 +4,55 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
+/**
+ * The domain representing a reservation
+ * This domain will be used to populate the database
+ */
 @Entity
 @Table(name = "Reservation")
 public class ReservationDomain {
 
+    /**
+     * Id of the Reservation, used as a primary key in db
+     * <p>
+     * Will be auto generated
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    /**
+     * The checkin date
+     */
     @NotNull
     private LocalDate checkin;
 
+    /**
+     * The checkout date
+     */
     @NotNull
     private LocalDate checkout;
 
+    /**
+     * Many ReservationDomains can have only one ModuleDomain
+     * <p>
+     * This relation is used for our data base
+     */
     @ManyToOne
     private ModuleDomain moduleDomain;
 
+    /**
+     * Creates a new ReservationDomain instance with default values
+     */
     public ReservationDomain() {
     }
 
+    /**
+     * Creates a new ReservationDomain instance initializing the fields:
+     *
+     * @param checkin  the checkin date
+     * @param checkout the checkout date
+     */
     public ReservationDomain(LocalDate checkin, LocalDate checkout) {
         this.checkin = checkin;
         this.checkout = checkout;

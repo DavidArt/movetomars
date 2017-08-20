@@ -4,12 +4,17 @@ import com.davidrus.movetomars.domain.ReservationDomain;
 import com.davidrus.movetomars.model.response.ReservationResponse;
 import org.springframework.core.convert.converter.Converter;
 
+/**
+ * This class will convert a ReservationDomain to a ReservationResponse class
+ * Than we will use the ReservationResponse in the POST method on our Rest Controller
+ * Class used to keep the logic out of the controller
+ */
 public class ReservationDomainToReservationResponseConverter implements Converter<ReservationDomain, ReservationResponse> {
     /**
-     * Convert the source object of type {@code S} to target type {@code T}.
+     * Convert the source object of type {ReservationDomain} to target type {ReservationResponse}.
      *
-     * @param source the source object to convert, which must be an instance of {@code S} (never {@code null})
-     * @return the converted object, which must be an instance of {@code T} (potentially {@code null})
+     * @param source the source object to convert, which must be an instance of {ReservationDomain}
+     * @return the converted object, which must be an instance of {ReservationResponse}
      * @throws IllegalArgumentException if the source cannot be converted to the desired target type
      */
     @Override

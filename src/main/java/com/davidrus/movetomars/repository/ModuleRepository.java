@@ -11,7 +11,10 @@ import org.springframework.data.repository.CrudRepository;
 public interface ModuleRepository extends CrudRepository<ModuleDomain, Long> {
 
     /**
-     * This method will return a list of modules from our database
+     * This method will return a module from our database
+     * based on the id we provide as a argument in the parameter list
+     * <p>
+     * Used in the getModuleById method from our Rest API
      *
      * @param id the id of the module to search for
      * @return a ModuleDomain instance by id number

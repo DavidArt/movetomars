@@ -15,6 +15,8 @@ public class ModuleDomain {
 
     /**
      * Id of the Module, used as a primary key in db
+     * <p>
+     * Will be auto generated
      */
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,9 +35,12 @@ public class ModuleDomain {
     private Integer price;
 
     /**
-     * Default, a OneToMany annotation is Lazy
+     * Default, a OneToMany annotation is Lazy because we can have
+     * a lot of ReservationDomain entities
+     * <p>
+     * We want it to be Eager to have immediate access to that data
      */
-        @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     private List<ReservationDomain> reservationDomainList;
 
     /**
@@ -46,8 +51,9 @@ public class ModuleDomain {
 
     /**
      * Creates a new ModuleDomain instance initializing the:
+     *
      * @param moduleNumber The module number
-     * @param price The price of the module
+     * @param price        The price of the module
      */
     public ModuleDomain(Integer moduleNumber, Integer price) {
         this.moduleNumber = moduleNumber;

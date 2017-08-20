@@ -82,12 +82,15 @@ public class ReservationResource {
     }
 
     /**
-     * The Rest API for a GET request
+     * The Rest API for a GET request return a Pageable list of objects
+     * This reduces the load on the database and this allows our
+     * API consumer (front-end) to iterate through data more easily
      *
      * @param checkin  date for checkin to Mars colony
      * @param checkout date for checkout from Mars colony
-     * @return a ResponseEntity containing a ReservableModuleResponse
-     * with 200 (OK) status
+     * @return a Pageable list containing all the
+     * ReservableModuleResponses available for
+     * reservation and a 200 (OK) status
      */
     @RequestMapping(path = "", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public Page<ReservableModuleResponse> getAvailableModules(
@@ -137,7 +140,7 @@ public class ReservationResource {
      * The Rest Api for the DELETE request
      *
      * @param reservationId the id of the user that made the reservation
-     * @return
+     * @return a ResponseEntity instance
      */
     @RequestMapping(path = "/{reservationId}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteReservation(@PathVariable long reservationId) {

@@ -7,7 +7,7 @@ import com.davidrus.movetomars.model.Link;
  * <p>
  * Reservation response for the ReservationResource class
  * We send a instance of this class as a response in
- * the REST methods from our Rest Resource class
+ * the REST methods from our Rest API class
  */
 public class ReservableModuleResponse {
 
