@@ -38,6 +38,7 @@ public class ReservationDomain {
      * <p>
      * This relation is used for our data base
      */
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
     @ManyToOne
     private ModuleDomain moduleDomain;
 

@@ -105,7 +105,15 @@ public class ReservationResource {
          * Calling the findAll method from PageableModuleRepository will return
          * a Page object of ModuleDomain type, containing all the reservations made.
          */
-        Page<ModuleDomain> moduleDomainList = pageableModuleRepository.findAll(pageable);
+
+           Page<ModuleDomain> moduleDomainList = pageableModuleRepository.findAll(pageable);
+
+//        Iterable<ModuleDomain> itr = pageableModuleRepository.findAll();
+//        for (ModuleDomain module : itr) {
+//            if (module.equals(reservationRepository.findById(module.getId()))) {
+//                newModuleDomainList.
+//            }
+//        }
 
         /*
          * The map method will take a list of ModuleDomains objects, make the conversion
@@ -114,6 +122,13 @@ public class ReservationResource {
         return moduleDomainList.map(new ModuleDomainToReservableModuleResponseConverter());
     }
 
+    /**
+     * The getById method from our Rest API returns a ResponseEntity containing a
+     * ModelDomain object, passing all the fields including a list with all
+     * the reservation associated to that module object
+     * @param moduleId
+     * @return
+     */
     @RequestMapping(path = "/{moduleId}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<ModuleDomain> getModuleById(@PathVariable Long moduleId) {
         ModuleDomain moduleDomain = moduleRepository.findById(moduleId);
@@ -130,10 +145,27 @@ public class ReservationResource {
      */
     @RequestMapping(path = "", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<ReservableModuleResponse> updateReservation(
+    public ResponseEntity<ReservationResponse> updateReservation(
             @RequestBody ReservationRequest reservationRequest) {
 
-        return new ResponseEntity<>(new ReservableModuleResponse(), HttpStatus.OK);
+        ModuleDomain moduleDomain = moduleRepository.findById(reservationRequest.getModuleId());
+        ReservationDomain reservationDomain = null;
+
+        for (ReservationDomain reservation: moduleDomain.getReservationDomainList()) {
+            if (reservation.getId().equals(reservationRequest.getId())) {
+
+                reservationDomain = reservationRepository.findById(reservationRequest.getId());
+            } else return new ResponseEntity<>(new ReservationResponse(), HttpStatus.NO_CONTENT);
+        }
+        reservationDomain.setCheckin(reservationRequest.getCheckin());
+        reservationDomain.setCheckout(reservationRequest.getCheckout());
+        reservationRepository.save(reservationDomain);
+        moduleDomain.addReservationEntity(reservationDomain);
+        moduleRepository.save(moduleDomain);
+        reservationDomain.setModuleDomain(moduleDomain);
+        ReservationResponse reservationResponse = conversionService.convert(reservationDomain, ReservationResponse.class);
+
+        return new ResponseEntity<>(reservationResponse, HttpStatus.OK);
     }
 
     /**
@@ -145,6 +177,7 @@ public class ReservationResource {
     @RequestMapping(path = "/{reservationId}", method = RequestMethod.DELETE)
     public ResponseEntity<Void> deleteReservation(@PathVariable long reservationId) {
 
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        ReservationDomain reservationDomain = reservationRepository.findById(reservationId);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 }

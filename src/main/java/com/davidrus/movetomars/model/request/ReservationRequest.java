@@ -46,7 +46,7 @@ public class ReservationRequest {
     /**
      * Creates a new ReservationRequest instance
      *
-     * @param moduleId id of the room
+     * @param moduleId id of the module
      * @param checkin  checkin date
      * @param checkout checkout date
      */
